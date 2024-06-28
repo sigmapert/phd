@@ -1,0 +1,26 @@
+library(ahp)
+library(data.tree)
+library(yaml)
+ahpFile <- system.file("extdata", "Comparison_eCommerce.yaml", package="ahp")
+eCommerceAhp <- Load(ahpFile)
+print(eCommerceAhp, filterFun = isNotLeaf)
+Calculate(eCommerceAhp)
+print(eCommerceAhp)
+Visualize(eCommerceAhp)
+Analyze(eCommerceAhp)
+AnalyzeTable(eCommerceAhp)
+AnalyzeTable(eCommerceAhp,
+variable = "priority",
+sort = "orig",
+pruneFun = function(node, decisionMaker) PruneByCutoff(node, decisionMaker, 0.05),
+weightColor = "skyblue",
+consistencyColor = "red",
+alternativeColor = "green")
+
+AnalyzeTable(eCommerceAhp,
+variable = "priority",
+sort = "totalPriority",
+weightColor = "skyblue",
+consistencyColor = "red",
+alternativeColor = "green"
+)
